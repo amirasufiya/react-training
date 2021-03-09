@@ -1,19 +1,13 @@
-import './App.css';
+import Navbar from './Navbar';
+import Home from './Home';
 
 function App() {
-  const title = "Welcome miras";
-  const likes = 50;
-  const person = { name: 'youshi', age: 30}; //this is object
-  const google = "http://www.google.com";
 
   return (
     <div className="App">
+      <Navbar />
       <div className="content">
-        <h1>{ title }</h1>
-        <p>Liked { likes } times</p>
-        <p>{ 100 + 1}</p>
-        
-        <a href={ google }>Google</a>
+        <Home />
       </div>
     </div>
   );
