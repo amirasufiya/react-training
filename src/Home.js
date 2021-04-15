@@ -1,29 +1,29 @@
-import { useState } from 'react';
+import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 const Home = () => {
+  // const [name, setName] = useState('maria');
+  //   const handleDelete = (id) => {
+  //     const newBlogs = blogs.filter((blog) => blog.id !== id);
+  //     setBlogs(newBlogs);
+  //   };
 
-    // let name = 'mario';
-    const [name, setName] = useState('Mario'); //useState hook, can be any datatype
-    const [age, setAge] = useState(25);
+  const { data: blogs, isPending, error } = useFetch(
+    "http://localhost:8000/users"
+  );
 
-    const handleClick = (e) => {
-        // alert('hello, miras', e);
-        // console.log(e);
-        setName('Miras'); // this value is reactive
-        setAge(13);
-    }
-    const handleClickAgain = (e, name) => {
-        alert('Hello ' + name + '!', e.target );
-        console.log(e.target)
-    }
-    return (  
-        <div className="home">
-            <h1>Homepage</h1>
-            <p>{ name } is { age } years old </p>
-            <button onClick={ handleClick }>Click me</button>
-            {/* <button onClick={(e) => { handleClickAgain(e, 'Mario')}}> Click me again </button> */}
-        </div>
-     );
-}
- 
+  return (
+    <div className="home">
+      {/* display loading message */}
+      {error && <div> {error} </div>}
+      {isPending && <div> Loading... </div>}
+      {/* pass props here */}
+      {blogs && <BlogList blogs={blogs} title="All Blogs" />}
+      {/* <button onClick={() => setName('luigi')}>change name</button> */}
+      {/* <p>{ name }</p> */}
+      {/* <BlogList blogs={ blogs.filter((blog) => blog.author === 'mario' ) } title="Mario's Blogs" /> */}
+    </div>
+  );
+};
+
 export default Home;
